@@ -1,5 +1,5 @@
-三、路由的基本使用
-四、路由组件与一般组件
+## 三、路由的基本使用
+## 四、路由组件与一般组件
 1、写法不同
   一般组件：<Demo />
   路由组件：<Route path="/about" component={About} />
@@ -23,13 +23,48 @@
             params:{}
             path:"/"
             url:"/"
-五、NavLink与封装NavLink
+## 五、NavLink与封装NavLink
   1、NavLink可以实现路由链接的高亮，通过activeClassName指定样式名
   2、标签体内容时一个特殊的标签属性
   3、通过this.props.children可以获取标签体内容
-六、Switch的使用
+## 六、Switch的使用
   1、通常情况下，path和component是一一对应的关系
   2、Switch可以提高路由匹配效率（单一匹配）
+## 七、解决样式丢失问题
+  <link rel="stylesheet" href="./css/bootstrap.css" />是相对路径，会随着path改变而不能获取bootstrap
+  1、public/index.html 中引入样式时不写 ./ 写 / （常用）
+  2、public/index.html 中引入样式时不写 ./ 写 %PUBLIC_URL% (常用)
+  3、使用HashRouter;
+  
+## 八、路由的严格匹配与模糊匹配
+  1、默认使用的事模糊匹配（简单记：【输入的路径】必须包含要【匹配的路径】，且顺序要一致
+  2、开启严格撇皮：<Route exact={true}> path="/about" component={About} />
+  3、严格匹配不要随便开启，需要再开，有些时候开启会导致无法继续匹配二级路由
+## 九、Redirect的使用
+  1、一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由
+  2、具体编码：
+      <Switch>
+        <Route path="/about" component={About} />
+        <Route path="/home" component={Home} />
+        <Redirect to="/about" />
+      </Switch>
+## 十、嵌套路由
+  1、注册子路由时要写上父路由的path值
+  2、路由的匹配是按照路由的顺序进行的
+## 十一、向路由组件传递参数
+  1、params参数
+    路由链接（携带参数）：<Link to={`/home/message/detail/12/消息12`}>{msgObj.title}</Link>
+    注册路由（声明接收）：<Route path='/home/message/detail/:id/:title' component={Detail} />
+    接收参数：this.props.match.params
+  2、search参数
+    路由链接（携带参数）：<Link to={`/home/message/detail/?id=12&title=消息12`}>{msgObj.title}</Link>
+    注册路由（声明接收）：<Route path='/home/message/detail/' component={Detail} />
+    接收参数：this.props.location.search
+    备注：获取到的search是urlencoded编码字符串，需要借助querystring解析
+  3、state参数
+
+
+
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

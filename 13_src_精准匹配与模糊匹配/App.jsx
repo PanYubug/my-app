@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Header from './components/Header'; //Header是一般组件
 import MyNavLink from './components/MyNavLink';
 import TestD from './components/TestD';
@@ -34,7 +34,6 @@ export default class App extends Component {
                   <Route path="/about" component={About} />
                   <Route path="/home" component={Home} />
                   <Route path="/home" component={TestD} />
-                  <Redirect to="/about" />
                 </Switch>
               </div>
             </div>
