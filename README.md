@@ -62,12 +62,36 @@
     接收参数：this.props.location.search
     备注：获取到的search是urlencoded编码字符串，需要借助querystring解析
   3、state参数
+    路由链接（携带参数）：<Link to={{ pathname: '/home/message/detail', state: { id: msgObj.id, title: msgObj.title } }}>{msgObj.title}</Link>
+    注册路由（声明接收）：<Route path='/home/message/detail/' component={Detail} />
+    接收参数：this.props.location.state
+    备注：刷新也可以保留住参数
+## 十二、编程式路由导航
+  借助this.prop.history对象上的API对操作路由跳转、前进、后退
+    -this.prop.history.push()
+    -this.prop.history.replace()
+    -this.prop.history.goBack()
+    -this.prop.history.goForward()
+    -this.prop.history.go()
+## 十三、BrowserRouter和HashRouter的区别
+  1、底层原理不一样
+    BrowserRouter使用的事H5的history API，不兼容IE9及以下版本
+    HashRouter使用的事URL的哈希值
+  2、path表现形式不一样
+    BrowserRouter的路径中美欧#，例如：localhost:3000/demo/test
+    HashRouter的路径不含#例如：localhost://3000/#/demo/teat
+  3、刷新后对路由state参数的影响
+    （1）BrowserRouter没有任何影响，因为state保存在history那对象中
+    （2）HashRouter刷新后会导致路由state参数的丢失！！！
+  4、备注：HashRouter可以用于解决一些路径错误相关的问题
+
 
 
 
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
